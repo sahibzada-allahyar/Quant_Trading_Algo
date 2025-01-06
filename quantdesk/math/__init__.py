@@ -1,0 +1,1 @@
+"""Mathematical utilities for quantitative analysis.""" 

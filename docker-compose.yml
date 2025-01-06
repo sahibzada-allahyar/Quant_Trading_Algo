@@ -1,0 +1,40 @@
+version: "3.8"
+services:
+  api:
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    container_name: quantdesk-api
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      - redis
+      - mlflow
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./logs:/app/logs
+  redis:
+    image: redis:7-alpine
+    container_name: quantdesk-redis
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v2.14.1
+    ports:
+      - "5000:5000"
+    container_name: quantdesk-mlflow
+    restart: unless-stopped
+    volumes:
+      - mlruns:/mlruns
+
+volumes:
+  redis-data:
+  mlruns: 
