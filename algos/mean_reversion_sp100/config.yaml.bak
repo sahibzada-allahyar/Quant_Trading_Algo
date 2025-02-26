@@ -1,0 +1,99 @@
+name: "Mean Reversion S&P 100"
+description: "Z-score based mean reversion strategy for S&P 100 constituents"
+version: "1.0.0"
+author: "QuantDesk Team"
+
+# Strategy parameters
+strategy:
+  class: "algos.mean_reversion_sp100.strategy.MeanReversionSP100"
+  params:
+    lookback_period: 60
+    return_period: 5
+    zscore_threshold: 2.0
+    max_positions: 3
+    volatility_target: 0.10
+    kelly_fraction: 0.25
+    stop_loss: 0.03
+    take_profit: 0.015
+    printlog: false
+
+# Universe definition
+universe:
+  provider: "alpaca"
+  symbols:
+    - "AAPL"
+    - "MSFT" 
+    - "GOOGL"
+    - "AMZN"
+    - "TSLA"
+    - "META"
+    - "NVDA"
+    - "JPM"
+    - "JNJ"
+    - "V"
+    - "PG"
+    - "UNH"
+    - "HD"
+    - "MA"
+    - "DIS"
+    - "PYPL"
+    - "BAC"
+    - "NFLX"
+    - "ADBE"
+    - "CRM"
+  frequency: "1m"  # 1-minute bars
+
+# Backtest configuration
+backtest:
+  start_date: "2020-01-01"
+  end_date: "2024-12-31"
+  initial_cash: 100000
+  commission: 0.005  # $0.005 per share
+  slippage: 0.0005   # 5 basis points
+  
+# Risk management
+risk:
+  max_position_size: 10000  # USD
+  max_daily_loss: 1000      # USD
+  max_drawdown: 0.15        # 15%
+  position_timeout: 1440    # Minutes (24 hours)
+
+# Performance targets (for validation)
+targets:
+  sharpe_ratio: 1.2
+  win_rate: 0.54
+  max_drawdown: 0.04
+  cagr: 0.18
+
+# Data requirements
+data:
+  warmup_period: 120  # Minutes of data needed before trading
+  required_fields:
+    - "open"
+    - "high" 
+    - "low"
+    - "close"
+    - "volume"
+
+# Execution settings
+execution:
+  order_type: "market"
+  time_in_force: "day"
+  allow_fractional: false
+  min_order_size: 1
+
+# Monitoring
+monitoring:
+  log_level: "INFO"
+  metrics_frequency: "1h"
+  alert_thresholds:
+    drawdown: 0.05
+    position_count: 5
+    daily_loss: 500
+
+# Paper trading
+paper_trading:
+  enabled: true
+  broker: "alpaca"
+  initial_balance: 100000
+  max_order_value: 5000 
