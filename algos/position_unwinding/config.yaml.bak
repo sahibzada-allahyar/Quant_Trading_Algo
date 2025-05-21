@@ -1,0 +1,192 @@
+name: "Institutional Position Unwinding"
+description: "Advanced position unwinding strategies for large institutional positions"
+version: "1.0.0"
+author: "QuantDesk Team"
+
+# Strategy parameters
+strategy:
+  class: "algos.position_unwinding.strategy.PositionUnwindingStrategy"
+  params:
+    unwind_method: "adaptive"  # twap, vwap, iceberg, is, adaptive
+    target_position: 0  # Target position (0 = full unwind)
+    max_participation_rate: 0.20  # Max % of volume to consume
+    min_participation_rate: 0.05  # Min % of volume to consume
+    time_horizon: 240  # Minutes to complete unwinding
+    iceberg_show_size: 0.1  # % of order to show in iceberg orders
+    volatility_threshold: 0.02  # Pause if volatility exceeds 2%
+    liquidity_buffer: 0.3  # Reserve 30% of ADV for liquidity
+    risk_factor: 0.5  # Risk aversion (0=aggressive, 1=conservative)
+    rebalance_frequency: 5  # Minutes between rebalancing
+    max_order_value: 50000  # Maximum single order value USD
+    stealth_mode: true  # Use randomization to avoid detection
+    dark_pool_preference: 0.7  # Preference for dark pools (0-1)
+    printlog: false
+
+# Execution profiles for different scenarios
+execution_profiles:
+  conservative:
+    max_participation_rate: 0.10
+    min_participation_rate: 0.03
+    time_horizon: 480  # 8 hours
+    risk_factor: 0.8
+    volatility_threshold: 0.015
+    stealth_mode: true
+    
+  aggressive:
+    max_participation_rate: 0.30
+    min_participation_rate: 0.10
+    time_horizon: 120  # 2 hours
+    risk_factor: 0.2
+    volatility_threshold: 0.03
+    stealth_mode: false
+    
+  stealth:
+    max_participation_rate: 0.08
+    min_participation_rate: 0.02
+    time_horizon: 720  # 12 hours
+    risk_factor: 0.9
+    volatility_threshold: 0.01
+    stealth_mode: true
+    dark_pool_preference: 0.9
+
+# Algorithm-specific parameters
+algorithms:
+  twap:
+    name: "Time-Weighted Average Price"
+    description: "Spreads execution evenly across time"
+    best_for: "Stable markets with predictable volume"
+    
+  vwap:
+    name: "Volume-Weighted Average Price"
+    description: "Executes proportional to historical volume"
+    best_for: "Markets with strong volume patterns"
+    volume_lookback: 20  # Days for volume averaging
+    
+  iceberg:
+    name: "Iceberg Orders"
+    description: "Hides order size by showing small portions"
+    best_for: "Large orders in liquid markets"
+    show_size_range: [0.05, 0.15]  # Random show size %
+    refresh_threshold: 0.8  # Refresh when filled %
+    
+  implementation_shortfall:
+    name: "Implementation Shortfall"
+    description: "Balances market impact vs timing risk"
+    best_for: "Volatile markets with timing constraints"
+    impact_model: "sqrt"  # sqrt, linear, or ml
+    
+  adaptive:
+    name: "Adaptive Execution"
+    description: "ML-based dynamic execution optimization"
+    best_for: "All market conditions"
+    model_features: 
+      - "spread"
+      - "depth"
+      - "volatility"
+      - "volume_ratio"
+      - "price_trend"
+      - "time_of_day"
+
+# Risk management
+risk:
+  max_position_exposure: 0.20  # Max % of portfolio per position
+  max_daily_unwind: 0.50  # Max % of position to unwind per day
+  circuit_breakers:
+    volatility_spike: 0.05  # Pause if vol > 5%
+    volume_drought: 0.3     # Pause if volume < 30% of normal
+    adverse_price_move: 0.03  # Pause if price moves > 3% against
+  
+  emergency_liquidation:
+    enabled: true
+    trigger_loss: 0.10  # Emergency exit if position down 10%
+    method: "market"    # Use market orders for emergency
+    max_slippage: 0.02  # Accept up to 2% slippage
+
+# Market microstructure
+microstructure:
+  tick_size: 0.01
+  min_order_size: 1
+  max_order_size: 10000
+  
+  venues:
+    primary_exchange: 0.4  # 40% to primary exchange
+    dark_pools: 0.4        # 40% to dark pools
+    ecns: 0.2             # 20% to ECNs
+    
+  order_types:
+    market: 0.1           # 10% market orders
+    limit: 0.7            # 70% limit orders
+    hidden: 0.2           # 20% hidden orders
+
+# Performance benchmarks
+benchmarks:
+  twap_benchmark: true      # Compare to TWAP benchmark
+  vwap_benchmark: true      # Compare to VWAP benchmark
+  arrival_price: true       # Compare to arrival price
+  
+  target_metrics:
+    implementation_shortfall: 25  # bps
+    market_impact: 15            # bps
+    timing_cost: 10              # bps
+    completion_rate: 0.95        # 95% completion rate
+
+# Data requirements
+data:
+  required_history: 30  # Days of history needed
+  tick_data: false      # Use minute bars (not tick data)
+  level2_data: false    # Order book data not required
+  
+  required_fields:
+    - "open"
+    - "high"
+    - "low"
+    - "close"
+    - "volume"
+    - "vwap"  # If available
+
+# Monitoring and alerts
+monitoring:
+  real_time_metrics: true
+  alert_thresholds:
+    execution_delay: 10     # Alert if execution delayed > 10 min
+    slippage_threshold: 50  # Alert if slippage > 50 bps
+    completion_risk: 0.2    # Alert if completion risk > 20%
+    
+  reporting_frequency: "5min"
+  
+  dashboards:
+    - "execution_progress"
+    - "market_impact"
+    - "risk_monitoring"
+    - "venue_analysis"
+
+# Backtesting
+backtest:
+  start_date: "2020-01-01"
+  end_date: "2024-12-31"
+  initial_cash: 1000000
+  commission: 0.005
+  slippage: 0.001
+  
+  scenarios:
+    - name: "large_tech_unwind"
+      positions: {"AAPL": 10000, "MSFT": 8000, "GOOGL": 5000}
+      target: {"AAPL": 0, "MSFT": 0, "GOOGL": 0}
+      
+    - name: "partial_portfolio_rebalance"
+      positions: {"SPY": 20000, "QQQ": 15000}
+      target: {"SPY": 10000, "QQQ": 7500}
+
+# Compliance
+compliance:
+  position_limits: true     # Respect position limits
+  concentration_limits: true # Respect concentration limits
+  market_hours_only: true   # Trade only during market hours
+  
+  regulations:
+    - "MiFID II"  # Best execution requirements
+    - "Reg NMS"   # Order protection rules
+    - "MAR"       # Market abuse regulation
+    
+  audit_trail: true         # Maintain full audit trail
+  best_execution: true      # Document best execution 
