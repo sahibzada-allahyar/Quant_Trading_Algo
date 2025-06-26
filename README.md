@@ -1,7 +1,7 @@
 # Quant Sentinel HiveMind Trading Fortress by Singularity Research
 
 
-An open sourced quantitative trading algorithm, meant to democratize Citadel / Jane Street level quant trading for the public. Have you ever wondered what a quantitative trading algorithm looks like at Citadel or Jane Street, this project will demistify that and give the public access to quantitative trading systems that previously only a few select hedge funds had access to. 
+An open sourced quantitative trading algorithm, meant to democratize Citadel / Jane Street level quant trading for the public. Have you ever wondered what a quantitative trading algorithm looks like at Citadel or Jane Street? This project will demistify that and expose this gatekept knowledge - therefore, giving the public access to quantitative trading systems that previously only a few select hedge funds had access to. 
 
 
 
