@@ -17,10 +17,7 @@ Our team consists of the most brilliant quantitative researchers and trading eng
 - Stanford University
 - Cambridge University
 - Anthropic
-- Renaissance Technologies
-- Two Sigma
 - Citadel
-- Jane Street Capital
 
 ## Features
 
