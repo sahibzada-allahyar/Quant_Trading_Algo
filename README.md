@@ -1,33 +1,15 @@
+# Quant Sentinel HiveMind Trading Fortress
+
+A personal open-source quantitative trading algorithm, meant to democratize Citadel / Jane Street level quant trading for the public. Have you ever wondered what a quantitative trading algorithm looks like at Citadel or Jane Street? This project will demistify that and expose this gatekept knowledge - therefore, giving the public access to quantitative trading systems that previously only a few select hedge funds had access to.
+
 ## Press Coverage
 - [Cambridge physicist and AI pioneer Sahibzada Allahyar achieves historic score in theoretical physics exam](https://www.nyjtech.com/article/cambridge-physicist-and-ai-pioneer-sahibzada-allahyar-achieves-historic-score-in-theoretical-physics-exam)
 - [YC Killer: How Cambridge physicist Sahibzada Allahyar built the world's most popular AI agents library](https://www.nyjtech.com/article/yc-killer-how-cambridge-physicist-sahibzada-allahyar-built-the-worlds-most-popular-ai-agents-library)
-- [Sahibzada Allahyar's Singularity Research: The elite lab uniting Harvard, MIT, and Cambridge's brightest minds to democratize AI](https://www.nyjtech.com/article/sahibzada-allahyars-singularity-research-the-elite-lab-uniting-harvard-mit-and-cambridges-brightest-minds-to-democratize-ai)
-# Quant Sentinel HiveMind Trading Fortress by Singularity Research
-
-
-An open sourced quantitative trading algorithm, meant to democratize Citadel / Jane Street level quant trading for the public. Have you ever wondered what a quantitative trading algorithm looks like at Citadel or Jane Street? This project will demistify that and expose this gatekept knowledge - therefore, giving the public access to quantitative trading systems that previously only a few select hedge funds had access to. 
-
-
-
-> 🌟 **Join Our Mission**: We're systematically democratizing quantitative finance by open-sourcing enterprise-grade trading systems that rival the most sophisticated hedge funds. If you have a stellar academic background and are excited about making advanced quant strategies accessible to everyone, please star this repository and [apply to join our team](www.singularityresearchlabs.com).
-
-
 A complete, production-ready quantitative trading fortress that brings institutional-grade algorithmic trading capabilities to everyone. Our mission is to democratize quantitative finance and break down the barriers that have kept sophisticated trading strategies locked behind the walls of elite hedge funds.
 
 ## Our Mission
 
 We believe access to advanced quantitative trading strategies is a human right in the modern financial system. While hedge funds charge 2% management fees and 20% performance fees for strategies built on decades-old infrastructure, we're creating cutting-edge algorithmic trading systems and making them freely available to everyone. Our goal is to accelerate financial democratization and give retail traders the same tools used by institutional giants like Citadel, Renaissance Technologies, and Two Sigma.
-
-## Our Team
-
-Our team consists of the most brilliant quantitative researchers and trading engineers in the world, including alumni from:
-- Google DeepMind
-- Harvard University  
-- MIT
-- Stanford University
-- Cambridge University
-- Anthropic
-- Citadel
 
 ## Features
 
@@ -459,18 +441,6 @@ export RISK_LIMIT=1000000
 systemctl start quant-fortress
 ```
 
-## Apply to Collaborate
-
-We're looking for exceptional quantitative researchers and trading engineers who share our vision of democratizing finance:
-
-- **Quantitative Researchers**: PhD in Mathematics, Physics, Statistics, or Finance with systematic trading experience
-- **Trading Engineers**: Experience with execution algorithms, market microstructure, or high-frequency trading
-- **Risk Management Specialists**: Background in portfolio risk, derivatives, or institutional risk management
-- **Data Engineers**: Experience with financial data processing and real-time systems
-- **Open Source Enthusiasts**: Passionate about making sophisticated tools accessible to everyone
-
-**Apply here**: [https://forms.gle/jqkYvYHhE4Pjbnxj6](https://forms.gle/jqkYvYHhE4Pjbnxj6)
-
 ## Contributing
 
 We welcome contributions from the community:
@@ -495,16 +465,10 @@ The strategies and algorithms provided are for educational purposes and should b
 
 ## Contact
 
-- **Email**: [sahibzada@singularityresearchlabs.com](mailto:sahibzada@singularityresearchlabs.com)
-- **Website**: [https://www.singularityresearchlabs.com](https://www.singularityresearchlabs.com)
 - **GitHub**: [@sahibzada-allahyar](https://github.com/sahibzada-allahyar)
-
-## About Singularity Research
-
-Singularity Research is dedicated to democratizing advanced technologies through open source initiatives. We believe in making institutional-grade AI and quantitative finance tools accessible to everyone, fostering innovation and breaking down barriers in finance and technology. Our goal is to accelerate technologies that empower individuals and challenge the monopolies of overfunded, underperforming institutions.
 
 ---
 
-**Made with ❤️ by Singularity Research Labs**
+**Created by [Sahibzada Allahyar](https://github.com/sahibzada-allahyar)**
 
 *"The best way to predict the future is to create it, and the best way to create it is to make it open source."*
