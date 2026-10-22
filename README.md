@@ -1,3 +1,5 @@
+Personal website: [Sahibzada Allahyar](https://sahibzada-allahyar.github.io)
+
 # Quant Sentinel HiveMind Trading Fortress
 
 A personal open-source quantitative trading algorithm, meant to democratize Citadel / Jane Street level quant trading for the public. Have you ever wondered what a quantitative trading algorithm looks like at Citadel or Jane Street? This project will demistify that and expose this gatekept knowledge - therefore, giving the public access to quantitative trading systems that previously only a few select hedge funds had access to.
